@@ -32,4 +32,20 @@ def create_item(name):
         if store["name"] == name:
             new_item = {"name": request_data["name"], "price": request_data["price"]}
             store["items"].append(new_item)
-            return new_item
+            return new_item, 201
+    return {"message":"Store not found"}, 404
+
+@app.get("/store/<string:name>")
+def get_store(name):
+    for store in stores:
+        if store["name"] == name:
+            return store, 201
+    return {"message":"Store not found"}, 404
+
+@app.get("/store/<string:name>/item")
+def get_items(name):
+    for store in stores:
+        if store["name"] == name:
+            return store["items"], 201
+    return {"message":"Store not found"}, 404
+
