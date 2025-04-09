@@ -3,9 +3,13 @@
 #Created by : Chris Stark
 
 print('This is a program to add two numbers')
-x = input('Key in the first number : ')
-y = input('Key in the second number: ')
-x = int(x)
-y = int(y)
-z = x + y
-print('The value of Sum : ', z)
+try : 
+    x = input('Key in the first number : ')
+    y = input('Key in the second number: ')
+    x = int(x)
+    y = int(y)
+except :
+    print('Alert : input only the integers')
+else :
+    z = x + y
+    print('The value of Sum : ', z)
