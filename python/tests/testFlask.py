@@ -17,7 +17,8 @@ ao = import_from_path('app', module_path)
 
 
 def client():
-         client = ao.test_client()
+         test_app = Flask(ao)
+         client = test_app.test_client()
          landing = client.get("/store")
          html = landing.data.decode()
          print(html)
@@ -25,7 +26,8 @@ def client():
 class TestApp(ut.TestCase):
 
     def setUp(self):
-        self.app = ao.test_client()
+        test_app = Flask(ao)
+        self.app = test_app.test_client()
         self.app.testing = True
 
     def tearDown(self):
@@ -38,7 +40,7 @@ class TestApp(ut.TestCase):
 
     def test_post_route(self):
         data = {'key': 'value'}
-        result = self.app.post('/post_route', data=data)
+        result = self.app.post('/store', data=data)
         self.assertEqual(result.status_code, 200)
         # Add assertions based on the expected behavior of your post route
 
